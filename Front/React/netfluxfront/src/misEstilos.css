@@ -1,0 +1,218 @@
+/*Aqui es el diseño del logo NetFlux*/
+  #logo {
+    display: block;
+    margin: 0 auto;
+    width: 250px;
+    height: 100px;
+  }
+  /*Colores de la parte del medio en general*/
+  .descripcionCatalogo {
+    background-color: #333; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 20px; /* Espacio interno */
+    border-radius: 10px; /* Borde redondeado */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center; /* Texto centrado */
+    font-size: 18px; /* Tamaño de fuente */
+    line-height: 1.4; /* Espaciado entre líneas */
+  }
+  .container.mt-5{
+    background-color: #f7f7f7;
+  }
+  .container-fluid{
+    min-height: 481px;
+  }
+  .nameColor{
+    color: #17a2b8;
+    font-weight: bold;
+  }
+  
+  /* Estilos de las tarjetas, estilo de las peliculas y series del medio */
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  .card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  .card-img-top {
+    width: auto;
+    height: 250px;
+  }
+  .nuevas-peliculas {
+    padding: 20px;
+  }
+  
+  .nuevas-series {
+    padding: 20px;
+  }
+  
+  .nuevas-peliculas,
+  .nuevas-series {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+  /* Estilos para la línea separadora entre peliculas y series */
+  .separador {
+    border: none;
+    height: 3px;
+    background-color: #ff5722;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  /* Estilos del pie de página footer */
+  footer {
+    background-color: #333;
+    color: white;
+  }
+  footer p {
+    margin: 0;
+  }
+  
+  /*Estilos de la parte de detalles de pelicula*/
+  .jumbotron h1 {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  .jumbotron p {
+    font-size: 18px;
+  }
+  
+  .jumbotron .btn-primary {
+    background-color: #ff005c;
+    border-color: #ff005c;
+    font-weight: bold;
+  }
+  /* Estilos para las tarjetas de actores en diseño horizontal */
+  
+
+  .actor-card .actor-item {
+    text-align: center;
+  }
+  .actor-card ul{
+    justify-content: center;
+    align-items: center;
+  }
+  .actor-card li{
+    margin-left: 15px;
+    margin-right: 15px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .actor-card .actor-link {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  .actor-card .actor-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 25%;
+  }
+
+  .actor-card .actor-name {
+    margin-top: 5px;
+    font-weight: bold;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .creador-card .creador-item {
+    text-align: center;
+  }
+  .creador-card ul{
+    justify-content: center;
+    align-items: center;
+  }
+  .creador-card li{
+    margin-left: 15px;
+    margin-right: 15px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .creador-card .creador-link {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  .creador-card .creador-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 25%;
+  }
+
+  .creador-card .creador-name {
+    margin-top: 5px;
+    font-weight: bold;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  /*Aqui el diseño de la parte de destacados y Trailers*/
+  .mini-card {
+    text-decoration: none;
+    color: #333;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .mini-card .card {
+    width: 10rem;
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(153, 136, 136, 0.1);
+    transition: transform 0.2s; 
+  }
+  
+  .mini-card .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .mini-card .card-body {
+    text-align: center;
+  }
+  
+  .mini-card .card-img-top {
+    max-height: 150px;
+  }
+  
+  .thumbnail-image {
+    max-width: 50px;
+    max-height: 50px; 
+    border-radius: 5px;
+  }
+  .directorTable .creador-name{
+    text-decoration: none;
+  }
+  
+  
+  
+  
