@@ -1,0 +1,18 @@
+Hola buenas, la practica contempla todos los apartados comentados en el moodle, además he añadido mas cosas como en la parte de administracion se puede ver que hay buscador, paginacion, ordenacion por varios atributos(dandole click en la columna deseada para ordenar), validaciones de formulario. También importante he añadido una nueva gestión de usuarios administradores, asi para poder editar y eliminar otros usuarios admins
+
+
+
+Para ejecutar react: 
+npm i
+npm start
+
+
+Por cierto hay muchos datos por defecto añadido por data.sql.
+
+Por si quieres pruebar un usuario admin:
+username: admin@ua.es
+password: admin
+
+
+Gracias, un placer
+Un saludo.

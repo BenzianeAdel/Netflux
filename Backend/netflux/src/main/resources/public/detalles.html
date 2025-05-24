@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles NetFlux</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/misEstilos.css">
+</head>
+<body>
+    <div class="containerLogo">
+        <img src="img/logo.png" alt="Imagen de encabezado" class="img-fluid" id="logo">
+    </div>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">PELICULAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TELEVISION</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">DOCUMENTALES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">RECOMENDACIONES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TRAILERS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-9 col-xl-9 col-md-12">
+                <div class="row" id="detalleHeadContainer">
+                </div>
+                <div class="row" id="detalleMultimediaContainer">
+                </div>
+                <div class="row">
+                    <div class="reparto" id="repartoContainer">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-3 col-xl-3 col-md-12">
+                &nbsp;
+                <h3 class="nameColor">Destacados</h3>
+                <ul class="list-group" id="destacadosList"></ul>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <hr class="separador"> <!-- Línea separadora -->
+                </div>
+                <h3 class="nameColor">Trailers Nuevos</h3>
+                <ul class="list-group" id="trailersList"></ul>
+            </div>
+        </div>
+    </div>
+    &nbsp;
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>&copy; 2023 Netflux - Todos los derechos reservados</p>
+        </div>
+    </footer>
+    <script>
+
+        // Obtener el ID y el tipo de multimedia
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        const tipoContenido = urlParams.get('tipo');
+
+        // Determinar qué API consultar en función del tipo de contenido
+        let apiUrl = '';
+        if (tipoContenido === 'pelicula') {
+            apiUrl = `http://localhost:8080/peliculas/${id}`;
+        } else {
+            apiUrl = `http://localhost:8080/series/${id}`;
+        }
+
+        // Hacer una solicitud a la API correspondiente
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(detalleContenido => {
+                console.log(detalleContenido);
+                const detalleContainer = document.getElementById('detalleMultimediaContainer');
+                const imgElement = document.createElement('div');
+                imgElement.classList.add('col-sm-4', 'col-md-4', 'col-lg-4', 'col-xl-4', 'nuevas-peliculas');
+                imgElement.innerHTML = `<img src="${detalleContenido.imgURL}" class="img-fluid" alt="${detalleContenido.title}">`;
+
+                const contentElement = document.createElement('div');
+                contentElement.classList.add('col-sm-8', 'col-md-8', 'col-lg-8', 'col-xl-8', 'nuevas-peliculas');
+
+                const titleElement = document.createElement('h5');
+                titleElement.classList.add('card-title');
+                titleElement.textContent = detalleContenido.title;
+                const descriptionElement = document.createElement('p');
+                descriptionElement.classList.add('card-text');
+                descriptionElement.textContent = detalleContenido.description;
+
+                const yearElement = document.createElement('p');
+                let additionalInfoElement;
+                let creadoresElement;
+                let creatorsText;
+
+                if (tipoContenido === 'pelicula') {
+                    yearElement.innerHTML = `<strong>Año:</strong> ${detalleContenido.year}`;
+                    additionalInfoElement = document.createElement('p');
+                    additionalInfoElement.innerHTML = `<strong>Duración:</strong> ${detalleContenido.duration} minutos`;
+                    creadoresElement = document.createElement('p');
+                    creatorsText = '<strong>Directores:</strong>';
+                    if (detalleContenido.director && detalleContenido.director.length > 0) {
+                        detalleContenido.director.forEach((director, index) => {
+                            creatorsText += ` ${director.nombre}`;
+                            if (index < detalleContenido.director.length - 1) {
+                                creatorsText += ',';
+                            }
+                        });
+                    } else {
+                        creatorsText += ' No disponible';
+                    }
+                    creadoresElement.innerHTML = creatorsText;
+                } else {
+                    yearElement.innerHTML = `<strong>Año de inicio:</strong> ${detalleContenido.yearStart}`;
+                    if(detalleContenido.yearEnd === 0){
+                        yearElement.innerHTML += `<p><strong>Año de fin:</strong> No ha acabado</p>`;
+                    }
+                    else{
+                        yearElement.innerHTML += `<p><strong>Año de fin:</strong> ${detalleContenido.yearEnd}</p>`;
+                    }
+                    additionalInfoElement = document.createElement('p');
+                    additionalInfoElement.innerHTML = `<strong>Temporadas:</strong> ${detalleContenido.seasons}`;
+                    creadoresElement = document.createElement('p');
+                    creatorsText = '<strong>Creadores:</strong>';
+                    if (detalleContenido.creators && detalleContenido.creators.length > 0) {
+                        detalleContenido.creators.forEach((creator, index) => {
+                            creatorsText += ` ${creator.nombre}`;
+                            if (index < detalleContenido.creators.length - 1) {
+                                creatorsText += ',';
+                            }
+                        });
+                    } else {
+                        creatorsText += ' No disponible';
+                    }
+                    creadoresElement.innerHTML = creatorsText;
+                }
+
+
+                detalleContainer.innerHTML = '';
+
+                detalleContainer.appendChild(imgElement);
+                contentElement.appendChild(titleElement);
+                contentElement.appendChild(descriptionElement);
+                contentElement.appendChild(yearElement);
+                contentElement.appendChild(additionalInfoElement);
+                contentElement.appendChild(creadoresElement);
+                detalleContainer.appendChild(contentElement);
+
+                //Contenedor del reparto
+                const repartoContainer = document.getElementById('repartoContainer');
+                const castElement = document.createElement('div');
+                castElement.classList.add('col-sm-12', 'col-md-12', 'col-lg-12', 'col-xl-12', 'nuevas-peliculas');
+
+                const castTitle = document.createElement('h5');
+                castTitle.textContent = 'Reparto';
+
+                const castList = document.createElement('ul');
+                castList.classList.add('list-unstyled', 'actor-list');
+
+                detalleContenido.cast.forEach(actor => {
+                    const actorItem = document.createElement('li');
+                    actorItem.classList.add('actor-item');
+
+                    const actorLink = document.createElement('a');
+                    actorLink.href = `https://www.google.com/search?q=${encodeURIComponent(actor.nombre)}`;
+                    actorLink.target = '_blank';
+                    actorLink.classList.add('actor-link');
+                    actorLink.textContent = actor.nombre;
+
+                    actorItem.appendChild(actorLink);
+                    castList.appendChild(actorItem);
+                });
+                repartoContainer.innerHTML = '';
+                castElement.appendChild(castTitle);
+                castElement.appendChild(castList);
+                repartoContainer.appendChild(castElement);
+
+
+                const detalleHead = document.getElementById('detalleHeadContainer');
+                const jumbotronElement = document.createElement('div');
+                jumbotronElement.classList.add('jumbotron', 'text-center');
+                const titlePrincipalElement = document.createElement('h1');
+                titlePrincipalElement.classList.add('display-4');
+                titlePrincipalElement.textContent = detalleContenido.title;
+
+                const yearPrincipalElement = document.createElement('p');
+                if(tipoContenido === 'pelicula'){
+                    yearPrincipalElement.innerHTML = `<strong>Año:</strong> ${detalleContenido.year}`;
+                }
+                else{
+                    yearPrincipalElement.innerHTML = `<strong>Año:</strong> ${detalleContenido.yearStart}`;
+                }
+
+                const hrElement = document.createElement('hr');
+                hrElement.classList.add('my-4');
+
+                const netflixLink = document.createElement('a');
+                netflixLink.classList.add('btn', 'btn-primary', 'btn-lg');
+                netflixLink.href = detalleContenido.url;
+                netflixLink.role = 'button';
+                netflixLink.textContent = 'Ver en Netflux';
+                jumbotronElement.appendChild(titlePrincipalElement);
+                jumbotronElement.appendChild(yearPrincipalElement);
+                jumbotronElement.appendChild(hrElement);
+                jumbotronElement.appendChild(netflixLink);
+                detalleHead.appendChild(jumbotronElement);
+
+            })
+            .catch(error => console.error('Error:', error));
+        function fetchDataAndRenderList(url, listId) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const list = document.getElementById(listId);
+
+                    data.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.className = 'list-group-item';
+
+                        const link = document.createElement('a');
+                        console.log(item);
+                        if(listId === 'trailersList'){
+                            link.href = `detalles.html?id=${item.id}&tipo=pelicula`;
+                        }
+                        else{
+                            if(item.type == 'Pelicula'){
+                                link.href = `detalles.html?id=${item.id}&tipo=pelicula`;
+                            }
+                            else{
+                                link.href = `detalles.html?id=${item.id}&tipo=serie`;
+                            }
+                        }
+
+                        link.className = 'card-link mini-card';
+
+                        const card = document.createElement('div');
+                        card.className = 'card';
+
+                        const img = document.createElement('img');
+                        img.src = item.imgURL;
+                        img.className = 'card-img-top img-fluid';
+                        img.alt = item.title;
+
+                        const cardBody = document.createElement('div');
+                        cardBody.className = 'card-body';
+
+                        const title = document.createElement('h5');
+                        title.className = 'card-title';
+                        title.textContent = item.title;
+
+                        cardBody.appendChild(title);
+                        card.appendChild(img);
+                        card.appendChild(cardBody);
+                        link.appendChild(card);
+                        listItem.appendChild(link);
+                        list.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error: ', error));
+        }
+        fetchDataAndRenderList('http://localhost:8080/destacados', 'destacadosList');
+        fetchDataAndRenderList('http://localhost:8080/trailers', 'trailersList');
+    </script>
+</body>
+</html>

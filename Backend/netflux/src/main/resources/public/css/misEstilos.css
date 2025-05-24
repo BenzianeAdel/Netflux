@@ -1,0 +1,177 @@
+/*Aqui es el diseño del logo NetFlux*/
+#logo {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+}
+.containerLogo{
+    background-color: #111111dd;
+}
+/*Diseño del menu*/
+.custom-navbar {
+    background-color: #ff5722;
+}
+.custom-navbar .nav-link {
+    color: white;
+    font-weight: bold;
+}
+.custom-navbar .nav-link.active {
+    background-color: #17a2b8;
+    color: white;
+    border-radius: 15px;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px rgba(23, 162, 184, 0.5);
+    font-weight: bold;
+}
+.navbar-nav .nav-item {
+    margin-right: 50px;
+}
+.navbar-nav .nav-item:last-child {
+    margin-right: 0;
+}
+.nav-item:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+/*Colores de la parte del medio en general*/
+.descripcionCatalogo {
+    background-color: #333; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 20px; /* Espacio interno */
+    border-radius: 10px; /* Borde redondeado */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    text-align: center; /* Texto centrado */
+    font-size: 18px; /* Tamaño de fuente */
+    line-height: 1.4; /* Espaciado entre líneas */
+}
+.container.mt-5{
+    background-color: #f7f7f7;
+}
+.nameColor{
+    color: #17a2b8;
+    font-weight: bold;
+}
+
+/* Estilos de las tarjetas, estilo de las peliculas y series del medio */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease-in-out;
+}
+.card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+.card-img-top {
+    width: auto;
+    height: 400px;
+}
+.nuevas-peliculas {
+    padding: 20px;
+}
+
+.nuevas-series {
+    padding: 20px;
+}
+
+.nuevas-peliculas,
+.nuevas-series {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+}
+/* Estilos para la línea separadora entre peliculas y series */
+.separador {
+    border: none;
+    height: 3px;
+    background-color: #ff5722;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/* Estilos del pie de página footer */
+footer {
+    background-color: #333;
+    color: white;
+}
+footer p {
+    margin: 0;
+}
+
+/*Estilos de la parte de detalles de pelicula*/
+.jumbotron h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.jumbotron p {
+    font-size: 18px;
+}
+
+.jumbotron .btn-primary {
+    background-color: #ff005c;
+    border-color: #ff005c;
+    font-weight: bold;
+}
+.actor-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.actor-item {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.actor-link {
+    text-decoration: none;
+    color: #17a2b8;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.actor-link:hover {
+    color: #0056b3;
+}
+
+.reparto {
+    margin-top: 20px;
+    text-align: center;
+}
+/*Aqui el diseño de la parte de destacados y Trailers*/
+.mini-card {
+    text-decoration: none;
+    color: #333;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.mini-card .card {
+    width: 10rem;
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s; 
+}
+
+.mini-card .card:hover {
+    transform: scale(1.05);
+}
+
+.mini-card .card-body {
+    text-align: center;
+}
+
+.mini-card .card-img-top {
+    max-height: 150px;
+}

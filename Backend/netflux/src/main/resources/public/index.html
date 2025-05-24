@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetFlux</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/misEstilos.css">
+</head>
+<body>
+    <div class="containerLogo">
+        <img src="img/logo.png" alt="Imagen de encabezado" class="img-fluid" id="logo">
+    </div>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">PELICULAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TELEVISION</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">DOCUMENTALES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">RECOMENDACIONES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TRAILERS</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        &nbsp;
+        <p class="descripcionCatalogo">El catálogo de NetFlux es un tesoro de entretenimiento que brinda la oportunidad de explorar, descubrir y disfrutar de un sinfín de historias, todo ello desde la comodidad de tu hogar. Ya seas un adicto al cine, un amante de las series, o un ávido documentalista, NetFlux tiene algo que te atrapará y te llevará en un viaje inolvidable a través del mundo del entretenimiento.</p>
+        <div class="row">
+            <div class="col-sm-12 col-lg-9 col-xl-9 col-md-12">
+                <h2 class="nameColor">Nuevas películas</h2>
+                <div class="row" id="nuevasPeliculasList">
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9">
+                    <hr class="separador"> <!-- Línea separadora -->
+                </div>
+                <h2 class="nameColor">Nuevas series</h2>
+                <div class="row" id="nuevasSeriesList">
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-3 col-xl-3 col-md-12">
+                &nbsp;
+                <h3 class="nameColor">Destacados</h3>
+                <ul class="list-group" id="destacadosList"></ul>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <hr class="separador"> <!-- Línea separadora -->
+                </div>
+                <h3 class="nameColor">Trailers Nuevos</h3>
+                <ul class="list-group" id="trailersList"></ul>
+            </div>
+        </div>
+    </div>
+    &nbsp;
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>&copy; 2023 Netflux - Todos los derechos reservados</p>
+        </div>
+    </footer>
+<script>
+    fetch('http://localhost:8080/peliculas/novedades')
+        .then(response => response.json())
+        .then(data => {
+            const nuevasPeliculasList = document.getElementById('nuevasPeliculasList');
+            data.forEach(pelicula => {
+                const colDiv = document.createElement('div');
+                colDiv.classList.add('col-sm-12', 'col-md-6', 'col-lg-3', 'col-xl-3', 'nuevas-peliculas');
+
+                const cardLink = document.createElement('a');
+                cardLink.href = `detalles.html?id=${pelicula.id}&tipo=pelicula`;
+                cardLink.classList.add('card-link');
+
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card');
+
+                const img = document.createElement('img');
+                img.src = pelicula.imgURL;
+                img.classList.add('card-img-top', 'img-fluid');
+                img.alt = pelicula.title;
+
+                const cardBodyDiv = document.createElement('div');
+                cardBodyDiv.classList.add('card-body');
+
+                const title = document.createElement('h5');
+                title.classList.add('card-title');
+                title.textContent = pelicula.title;
+                cardBodyDiv.appendChild(title);
+                cardDiv.appendChild(img);
+                cardDiv.appendChild(cardBodyDiv);
+                cardLink.appendChild(cardDiv);
+                colDiv.appendChild(cardLink);
+                nuevasPeliculasList.appendChild(colDiv);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+
+    fetch('http://localhost:8080/series/novedades')
+        .then(response => response.json())
+        .then(data => {
+            const nuevasPeliculasList = document.getElementById('nuevasSeriesList');
+            data.forEach(serie => {
+                const colDiv = document.createElement('div');
+                colDiv.classList.add('col-sm-12', 'col-md-6', 'col-lg-3', 'col-xl-3', 'nuevas-series');
+
+                const cardLink = document.createElement('a');
+                cardLink.href = `detalles.html?id=${serie.id}&tipo=serie`;
+                cardLink.classList.add('card-link');
+
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card');
+
+                const img = document.createElement('img');
+                img.src = serie.imgURL;
+                img.classList.add('card-img-top', 'img-fluid');
+                img.alt = serie.title;
+
+                const cardBodyDiv = document.createElement('div');
+                cardBodyDiv.classList.add('card-body');
+
+                const title = document.createElement('h5');
+                title.classList.add('card-title');
+                title.textContent = serie.title;
+                cardBodyDiv.appendChild(title);
+                cardDiv.appendChild(img);
+                cardDiv.appendChild(cardBodyDiv);
+                cardLink.appendChild(cardDiv);
+                colDiv.appendChild(cardLink);
+                nuevasPeliculasList.appendChild(colDiv);
+            });
+        })
+        .catch(error => console.error('Error: ', error));
+    function fetchDataAndRenderList(url, listId) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById(listId);
+
+                data.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+
+                    const link = document.createElement('a');
+                    //Aqui si es trailer, como hay que solo mostrar trailers de peliculas
+                    if(listId === 'trailersList'){
+                        link.href = `detalles.html?id=${item.id}&tipo=pelicula`;
+                    }
+                    else{
+                        //En los destacados, puede ser pelicula o serie
+                        if(item.type == 'Pelicula'){
+                            link.href = `detalles.html?id=${item.id}&tipo=pelicula`;
+                        }
+                        else{
+                            link.href = `detalles.html?id=${item.id}&tipo=serie`;
+                        }
+                    }
+
+                    link.className = 'card-link mini-card';
+
+                    const card = document.createElement('div');
+                    card.className = 'card';
+
+                    const img = document.createElement('img');
+                    img.src = item.imgURL;
+                    img.className = 'card-img-top img-fluid';
+                    img.alt = item.title;
+
+                    const cardBody = document.createElement('div');
+                    cardBody.className = 'card-body';
+
+                    const title = document.createElement('h5');
+                    title.className = 'card-title';
+                    title.textContent = item.title;
+
+                    cardBody.appendChild(title);
+                    card.appendChild(img);
+                    card.appendChild(cardBody);
+                    link.appendChild(card);
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error: ', error));
+    }
+    fetchDataAndRenderList('http://localhost:8080/destacados', 'destacadosList');
+    fetchDataAndRenderList('http://localhost:8080/trailers', 'trailersList');
+</script>
+</body>
+</html>
